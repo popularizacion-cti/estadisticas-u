@@ -91,6 +91,11 @@ def grafica_sector(df, clasificacion, nivel, region):
         category_orders={
             columna_sector: orden
         },
+        labels={
+            "Fecha_postulacion": "Año de postulación",
+            "Porcentaje": "Porcentaje de postulantes (%)",
+            columna_sector: "Sector"
+        },
         hover_data={"Porcentaje": ":.1f", "Cantidad": True}
     )
     
