@@ -76,27 +76,28 @@ st.set_page_config(layout="wide")
 
 @st.cache_data
 def cargar_datos():
-    return pd.read_parquet("df_postulantes.parquet")
+    df = pd.read_parquet("df_postulantes.parquet")
+
+    df["Sector_postulacion"] = pd.Categorical(
+        df["Sector_postulacion"],
+        categories=orden_sectores,
+        ordered=True
+    )
+
+    df["Sectorocde_postulacion"] = pd.Categorical(
+        df["Sectorocde_postulacion"],
+        categories=orden_sectores_ocde,
+        ordered=True
+    )
+    return df
 
 df = cargar_datos()
 
-df["Sector_postulacion"] = pd.Categorical(
-    df["Sector_postulacion"],
-    categories=orden_sectores,
-    ordered=True
-)
-
-df["Sectorocde_postulacion"] = pd.Categorical(
-    df["Sectorocde_postulacion"],
-    categories=orden_sectores_ocde,
-    ordered=True
-)
+st.header("ESTADÍSTICAS NACIONALES")
 
 # ==============================
 # GRÁFICA 1
 # ==============================
-
-st.header("Evolución porcentual por sector")
 
 # Selector de región
 regiones = sorted(df["Region_entidad"].dropna().unique().tolist())
