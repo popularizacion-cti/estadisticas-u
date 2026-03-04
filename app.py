@@ -35,11 +35,7 @@ fig = grafica_sector(
     df,
     clasificacion,
     nivel,
-    region,
-    orden_sectores,
-    orden_sectores_ocde,
-    colores_sectores,
-    colores_sectores_ocde
+    region
 )
 
 if fig is None:
