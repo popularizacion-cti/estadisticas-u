@@ -12,6 +12,8 @@ df = cargar_datos()
 # CONTROLES
 # ==============================
 
+st.title("ESTADÍSTICAS NACIONALES")
+
 nivel = st.selectbox(
     "Nivel de postulación",
     sorted(df["Nivel_postulacion"].dropna().unique())
