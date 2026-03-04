@@ -1,5 +1,9 @@
 import pandas as pd
 import plotly.express as px
+import plotly.io as pio
+
+# 🔥 Forzar template claro global
+pio.templates.default = "plotly_white"
 
 
 def grafica_sector(df, clasificacion, nivel, region,
@@ -92,6 +96,7 @@ def grafica_sector(df, clasificacion, nivel, region,
         markers=True,
         title=titulo,
         color_discrete_map=colores,
+        template="plotly_white",  # 👈 clave
         category_orders={
             columna_sector: orden,
             "Fecha_postulacion": sorted(df_melted["Fecha_postulacion"].unique())
@@ -99,10 +104,36 @@ def grafica_sector(df, clasificacion, nivel, region,
         hover_data={"Porcentaje": ":.1f", "Cantidad": True}
     )
 
+    # ==============================
+    # ESTILO FORZADO
+    # ==============================
+
     fig.update_layout(
         plot_bgcolor="white",
         paper_bgcolor="white",
-        font=dict(color="black")
+        font=dict(
+            family="Arial",
+            size=12,
+            color="black"
+        ),
+        title_font=dict(size=20, color="black"),
+        legend=dict(
+            font=dict(color="black")
+        )
+    )
+
+    fig.update_xaxes(
+        showline=True,
+        linewidth=1,
+        linecolor="black",
+        color="black"
+    )
+
+    fig.update_yaxes(
+        showline=True,
+        linewidth=1,
+        linecolor="black",
+        color="black"
     )
 
     return fig
