@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas Nacionales | Dashboard Oscuro</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-layout">
+        <aside class="sidebar-controls">
+            <div class="brand">Estadísticas de Interés Universitario</div>
+            
+            <div class="control-card">
+                <div class="control-label">
+                    <label for="nivel">Nivel:</label>
+                    <select id="nivel" class="dark-select"></select>
+                </div>
+            <div class="control-item radio-group">
+                <label class="control-label">Clasificación de sectores:</label>                
+                <div class="radio-options-row">
+                    <label class="dark-radio">
+                        <input type="radio" name="clasificacion" value="Tradicional" checked>
+                        <span class="radio-label">Tradicional</span>
+                    </label>
+                    <label class="dark-radio">
+                        <input type="radio" name="clasificacion" value="OCDE">
+                        <span class="radio-label">OCDE</span>
+                    </label>
+                </div>
+            </div>
+
+
+            <section class="map-card-sidebar">
+                
+                <div class="map-header">
+                    <h2>Selector Regional</h2>
+                    <!--  <button id="btn-nacional" class="btn-nacional">Ver Nacional</button>  -->
+                </div>
+
+                <div class="control-item" style="margin-bottom: 10px;">
+                    <select id="select-region" class="dark-select" style="width: 100%;">
+                        <option value="Nacional">Nacional</option>
+                    </select>
+                </div>
+
+                <div id="peru-map-container" class="map-content-mini">
+                    </div>
+                <div id="titulo_region_actual" class="region-info-text">Seleccionado: Nacional</div>
+            </section>
+
+            </div> <div class="control-card" style="margin-top: 15px; text-align: center; padding: 12px;">
+                <span style="color: #8b949e; font-size: 1.1rem;">
+                    Fuente: 
+                    <a href="https://tuni.pe/datos" target="_blank" style="color: #58a6ff; text-decoration: none; font-weight: 600; border-bottom: 1px dashed #58a6ff;">
+                        Base de datos de TUNI
+                    </a>
+                </span>
+            </div>
+
+        </aside>
+
+        <main class="dashboard-content">
+            <div class="dashboard-grid">
+                <section class="chart-card full-width">
+                    <h2>Porcentaje de postulantes por sector según región de la universidad</h2>
+                    <div id="contenedor_evolucion_sectores" class="plotly-graph"></div>
+                </section>
+
+                 <section class="chart-card full-width">
+                    <h2>Porcentaje de postulantes por sector según región del postulante</h2>
+                    <div id="aviso_lima_postulante" class="aviso-region"></div>
+                    <div id="contenedor_evolucion_sectores_postulante" class="plotly-graph"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Distribución por sectores acumulado según región de la universidad</h2>
+                    <div id="contenedor_distribucion_sectores_total" class="plotly-graph-pie"></div>
+                </section>
+
+                 <section class="chart-card full-width">
+                    <h2>Distribución por sectores acumulado según región del postulante</h2>
+                    <div id="aviso_dist_postulante" class="aviso-region"></div>
+                    <div id="contenedor_distribucion_sectores_total_postulante" class="plotly-graph-pie"></div>
+                </section>               
+
+                <section class="chart-card full-width">
+                    <h2>Top 5 carreras más populares por año</h2>
+                    <div id="contenedor_top_carreras" class="table-container"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Evolución por género</h2>
+                    <div id="contenedor_evolucion_genero" class="plotly-graph"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Evolución por sector y género</h2>
+                    <div id="contenedor_evolucion_genero_por_sector" class="plotly-graph-tall"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Evolución por edad</h2>
+                    <div id="contenedor_evolucion_edad" class="plotly-graph"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Evolución por sector y edad</h2>
+                    <div id="contenedor_evolucion_edad_por_sector" class="plotly-graph-tall"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Evolución de grupo de edad</h2>
+                    <div id="contenedor_evolucion_grupo_edad" class="plotly-graph"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Distribución por sector, grupo de edad y género</h2>
+                    <div id="contenedor_mapa_calor_edad_genero" class="plotly-graph-tall"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Evolución por gestión universitaria</h2>
+                    <div id="contenedor_evolucion_gestion" class="plotly-graph"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Evolución por sector y gestión universitaria</h2>
+                    <div id="contenedor_evolucion_gestion_por_sector" class="plotly-graph-tall"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Top 3 universidades más populares por sector</h2>
+                    <div id="contenedor_top_universidades_por_sector" class="plotly-graph-tall"></div>
+                </section>
+
+                <section id="seccion_polar" class="chart-card full-width">
+                    <h2>Preferencias por región</h2>
+                    <div id="contenedor_polar_regiones_por_sector"></div>
+                </section>
+                
+                <section class="chart-card full-width">
+                    <h2>Porcentaje de postulantes que migran desde su región hasta otras regiones</h2>
+                    <div id="aviso_3" class="aviso-region"></div>
+                    <div id="contenedor_migracion_postulante" class="plotly-graph"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Porcentaje de postulantes que migran desde su región hasta otras regiones por sector</h2>
+                    <div id="aviso_4" class="aviso-region"></div>
+                    <div id="contenedor_migracion_por_sector_postulante" class="plotly-graph-tall"></div>
+                </section>
+
+                <section class="chart-card full-width">
+                    <h2>Destinos más populares</h2>
+                    <div id="aviso_5" class="aviso-region"></div>
+                    <div id="contenedor_top_destinos_migracion" class="plotly-graph"></div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+    
+    <script src="mapa.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
